@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Autores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .autores-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .autor {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .autor:last-child {
+            border-bottom: none;
+        }
+        .autor strong {
+            display: block;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .autor span {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Autores</h1>
+
+    <div class="form-container">
+        <form method="GET">
+            {% csrf_token %}
+            <label for="kword" class="visually-hidden">Buscar autor</label>
+            <input type="text" id="kword" name="kword" placeholder="Ingrese Nombre" aria-label="Buscar autor">
+            <button type="submit">Consultar</button>
+        </form>
+    </div>
+
+    <section class="autores-container">
+        {% for aut in autores %}
+            <article class="autor">
+                <strong>{{ aut.nombre }} {{ aut.apellidos }}</strong>
+                <span>Nacionalidad: {{ aut.nacionalidad }}</span> |
+                <span>Edad: {{ aut.edad }}</span>
+            </article>
+        {% endfor %}
+    </section>
+
+</body>
+</html>
